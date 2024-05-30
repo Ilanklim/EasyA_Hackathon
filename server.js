@@ -1,80 +1,108 @@
+const express = require('express');
 const axios = require('axios');
+const app = express();
+const port = 3001;
 
 const apis = [
-  'https://stellar-anchor.payfura.com/sep24/info',
-  'https://transfer-server.zetl.network/info',
-  'https://connect.clickpesa.com/sep24/info',
-  'https://api.anclap.com/transfer24/info'
+  { url: 'https://stellar-anchor.payfura.com/sep24/info', name: 'Payfura' },
+  { url: 'https://transfer-server.zetl.network/info', name: 'Latamex' },
+  { url: 'https://connect.clickpesa.com/sep24/info', name: 'ClickPesa' },
+  { url: 'https://api.anclap.com/transfer24/info', name: 'Anclap' }
 ];
 
 // Function to fetch data from an API
-const fetchApiData = async (url) => {
+const fetchApiData = async (api) => {
   try {
-    const response = await axios.get(url);
-    return response.data;
+    const response = await axios.get(api.url);
+    return { data: response.data, name: api.name };
   } catch (error) {
-    console.error(`Error fetching data from ${url}:`, error.message);
+    console.error(`Error fetching data from ${api.url}:`, error.message);
     return null;
   }
 };
 
-// Function to aggregate results for a specific coin and find the best one based on the lowest fixed fee
+// Function to extract unique coins from the deposit sections
+const fetch_coins = (data) => {
+  const coinSet = new Set();
+  const coinsBySource = {};
+
+  data.forEach((apiData) => {
+    if (apiData && apiData.data && apiData.data.deposit) {
+      const depositCoins = Object.keys(apiData.data.deposit);
+      depositCoins.forEach((coin) => {
+        if (apiData.data.deposit[coin].enabled) {
+          coinSet.add(coin);
+          if (!coinsBySource[apiData.name]) {
+            coinsBySource[apiData.name] = [];
+          }
+          coinsBySource[apiData.name].push(coin);
+        }
+      });
+    }
+  });
+
+  return {
+    allCoins: Array.from(coinSet),
+    coinsBySource
+  };
+};
+
+// Function to aggregate results for a specific coin and type (deposit or withdraw)
 const aggregateResults = (data, coin, type) => {
-  let bestResult = null;
+  let results = [];
 
-  if (type == 'deposit') {
-    data.forEach((apiData) => {
-      console.log(apiData)
-      if (apiData && apiData.deposit && apiData.deposit[coin]) {
-        const coinData = apiData.deposit[coin];
+  data.forEach((apiData) => {
+    // For type = deposits
+    if (type === 'deposit' && apiData && apiData.data.deposit && apiData.data.deposit[coin]) {
+      const coinData = apiData.data.deposit[coin];
+      results.push({ coin, ...coinData, source: apiData.name });
+    }  // For type = withdraw
+    else if (type === 'withdraw' && apiData && apiData.data.withdraw && apiData.data.withdraw[coin]) {
+      const coinData = apiData.data.withdraw[coin];
+      results.push({ coin, ...coinData, source: apiData.name });
+    }
+  });
 
-        if (
-          coinData.enabled &&
-          (!bestResult || (coinData.fee_fixed && coinData.fee_fixed < bestResult.fee_fixed))
-        ) {
-          bestResult = { coin, ...coinData };
-        }
-      }
+  // Sort results by fee_fixed in ascending order
+  results.sort((a, b) => a.fee_fixed - b.fee_fixed);
 
-    });
-  } else if (type == 'withdraw') {
-    data.forEach((apiData) => {
-      console.log(apiData)
-      if (apiData && apiData.withdraw && apiData.withdraw[coin]) {
-        const coinData = apiData.withdraw[coin];
+  return results;
+};
 
-        if (
-          
-          (!bestResult || (coinData.fee_fixed && coinData.fee_fixed < bestResult.fee_fixed))
-        ) {
-          bestResult = { coin, ...coinData };
-        }
-      }
-    })
+// API to get the list of all coins supported by Anchors
+app.get('/api/all_coins_list', async (req, res) => {
+  const apiPromises = apis.map((api) => fetchApiData(api));
+  const apiData = await Promise.all(apiPromises);
+
+  const coins_list = fetch_coins(apiData);
+
+  if (coins_list.allCoins.length > 0) {
+    res.json(coins_list.allCoins);
+  } else {
+    res.status(404).json({ error: 'No coins found.' });
+  }
+});
+
+// API to get the aggregate result
+app.get('/api/aggregate', async (req, res) => {
+  const { coin, type } = req.query;
+  if (!coin || !type) {
+    return res.status(400).json({ error: 'Please provide both coin and type as query parameters' });
   }
 
-  return bestResult;
-  };
+  const apiPromises = apis.map((api) => fetchApiData(api));
+  const apiData = await Promise.all(apiPromises);
 
-  const main = async () => {
-    const coin = process.argv[2];
-    if (!coin) {
-      console.error('Please provide a coin as an argument');
-      process.exit(1);
-    }
-    const type = process.argv[3];
-    
+  // Result an array of Anchor Objects 
+  const aggregatedResults = aggregateResults(apiData, coin.toUpperCase(), type);
 
-    const apiPromises = apis.map((api) => fetchApiData(api));
-    const apiData = await Promise.all(apiPromises);
+  if (aggregatedResults.length > 0) {
+    res.json(aggregatedResults);
+  } else {
+    res.status(404).json({ error: `No suitable result found for coin: ${coin}` });
+  }
+});
 
-    const bestResult = aggregateResults(apiData, coin.toUpperCase(), type);
-
-    if (bestResult) {
-      console.log('Best Result:', bestResult);
-    } else {
-      console.log(`No suitable result found for coin: ${coin}`);
-    }
-  };
-
-  main();
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
