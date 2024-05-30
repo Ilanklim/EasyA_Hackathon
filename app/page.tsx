@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import styles from '..styles/style.css'; // Assuming you have a CSS module for styling
+import '../styles/style.css'; // Updated to match the existing file
 
 type AnchorData = {
   domain: string;
@@ -42,29 +42,29 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
+    <div className="container mx-auto p-4">
+      <header className="header text-center mb-4">
         <Image src="/logo.png" alt="Logo" width={150} height={150} />
-        <h1 className={styles.title}>Stellar Anchors</h1>
+        <h1 className="text-4xl font-bold">Stellar Anchors</h1>
       </header>
-      <main className={styles.main}>
-        <div className={styles.search}>
-          <label>
+      <main className="main">
+        <div className="search flex justify-center items-center mb-4">
+          <label className="mr-2">
             Select Coin:
             <input
               type="text"
               value={selectedCoin}
               onChange={(e) => setSelectedCoin(e.target.value.toUpperCase())}
-              className={styles.input}
+              className="input border p-2"
             />
           </label>
-          <button onClick={handleSearch} className={styles.button}>Search</button>
+          <button onClick={handleSearch} className="button bg-blue-500 text-white p-2 ml-2">Search</button>
         </div>
-        <div className={styles.results}>
+        <div className="results">
           {results.length > 0 ? (
             results.map((result, index) => (
-              <div key={index} className={styles.resultCard}>
-                <h2>{result.domain}</h2>
+              <div key={index} className="resultCard border p-4 mb-4">
+                <h2 className="text-2xl font-bold">{result.domain}</h2>
                 <p>Min Amount: {result.min_amount}</p>
                 <p>Max Amount: {result.max_amount}</p>
                 <p>Fixed Fee: {result.fee_fixed}</p>
