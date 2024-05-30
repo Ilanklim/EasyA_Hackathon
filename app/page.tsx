@@ -1,4 +1,4 @@
-"use client";
+// app/page.tsx
 
 /**
  * This file defines the main page component of the application.
@@ -6,10 +6,12 @@
  * for searching and displaying results.
  */
 
+"use client";
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import '../styles/style.css'; // Updated to match the existing file
+import '../styles/style.css'; // Import global styles
 
 type AnchorData = {
   domain: string;
@@ -21,6 +23,7 @@ export default function Home() {
   const [selectedCoin, setSelectedCoin] = useState<string>('');
   const [results, setResults] = useState<any[]>([]);
 
+  // Fetch anchor data from API on component mount
   useEffect(() => {
     const fetchAnchors = async () => {
       try {
@@ -33,6 +36,7 @@ export default function Home() {
     fetchAnchors();
   }, []);
 
+  // Handle search by filtering results based on selected coin
   const handleSearch = () => {
     const filteredResults = anchors.flatMap(anchor => {
       const { domain, data } = anchor;

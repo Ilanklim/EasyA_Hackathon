@@ -1,48 +1,84 @@
+/* styles/style.css */
+
 /**
  * This file contains the global CSS styles for the application.
  * It includes custom styles and Tailwind CSS classes.
  */
 
-
+/* Custom styles for the container */
 .container {
-  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
+/* Custom styles for the header */
 .header {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
+/* Custom styles for the title */
 .title {
-  font-size: 2em;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
-.main {
-  margin-top: 20px;
-}
-
+/* Custom styles for the search section */
 .search {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  margin-bottom: 2rem;
 }
 
+/* Custom styles for the input field */
 .input {
-  padding: 5px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  color: black;
+  background-color: white;
+  border-radius: 0.25rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+.input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Custom styles for the button */
 .button {
-  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
   cursor: pointer;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+.button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+}
+
+/* Custom styles for the results section */
 .results {
-  margin-top: 20px;
+  margin-top: 2rem;
 }
 
+/* Custom styles for the result card */
 .resultCard {
   border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.resultCard:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
