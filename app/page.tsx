@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import '../styles/style.css'; // Ensure this path is correct and the CSS file exists
+import styles from '..styles/style.css'; // Assuming you have a CSS module for styling
 
 type AnchorData = {
   domain: string;
@@ -42,28 +42,28 @@ export default function Home() {
   };
 
   return (
-    <div className="container">
-      <header className="header">
+    <div className={styles.container}>
+      <header className={styles.header}>
         <Image src="/logo.png" alt="Logo" width={150} height={150} />
-        <h1 className="title">Stellar Anchors</h1>
+        <h1 className={styles.title}>Stellar Anchors</h1>
       </header>
-      <main className="main">
-        <div className="search">
+      <main className={styles.main}>
+        <div className={styles.search}>
           <label>
             Select Coin:
             <input
               type="text"
               value={selectedCoin}
               onChange={(e) => setSelectedCoin(e.target.value.toUpperCase())}
-              className="input"
+              className={styles.input}
             />
           </label>
-          <button onClick={handleSearch} className="button">Search</button>
+          <button onClick={handleSearch} className={styles.button}>Search</button>
         </div>
-        <div className="results">
+        <div className={styles.results}>
           {results.length > 0 ? (
             results.map((result, index) => (
-              <div key={index} className="resultCard">
+              <div key={index} className={styles.resultCard}>
                 <h2>{result.domain}</h2>
                 <p>Min Amount: {result.min_amount}</p>
                 <p>Max Amount: {result.max_amount}</p>
