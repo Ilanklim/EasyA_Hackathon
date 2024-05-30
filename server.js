@@ -4,10 +4,24 @@ const app = express();
 const port = 3001;
 
 const apis = [
-  { url: 'https://stellar-anchor.payfura.com/sep24/info', name: 'Payfura' },
-  { url: 'https://transfer-server.zetl.network/info', name: 'Latamex' },
-  { url: 'https://connect.clickpesa.com/sep24/info', name: 'ClickPesa' },
-  { url: 'https://api.anclap.com/transfer24/info', name: 'Anclap' }
+  { url: 'https://stellar-anchor.payfura.com/sep24/info', name: 'Payfura', countries: [
+    "Brazil",
+    "Chile",
+    "Colombia",
+    "Ghana",
+    "Indonesia",
+    "Malaysia",
+    "Mexico",
+    "Nigeria",
+    "Peru",
+    "Philippines",
+    "Singapore",
+    "Thailand",
+    "United States"
+  ] },
+  { url: 'https://transfer-server.zetl.network/info', name: 'Latamex', countries: ["Argentina", "Brazil"] },
+  { url: 'https://connect.clickpesa.com/sep24/info', name: 'ClickPesa' , countries: ["Kenya", "Tanzania", "Rwanda"] },
+  { url: 'https://api.anclap.com/transfer24/info', name: 'Anclap', countries: ["Argentina", "Chile", "Colombia", "Peru", "Mexico"]  }
 ];
 
 // Function to fetch data from an API
