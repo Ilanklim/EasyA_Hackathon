@@ -1,17 +1,9 @@
-// app/page.tsx
-
-/**
- * This file defines the main page component of the application.
- * It integrates with the API to fetch anchor data and provides a UI
- * for searching and displaying results.
- */
-
 "use client";
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import '../styles/style.css'; // Import global styles
+import '../styles/globals.css'; // Correctly import global styles
 
 type AnchorData = {
   domain: string;
