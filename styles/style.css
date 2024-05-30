@@ -1,3 +1,9 @@
+/**
+ * This file contains the global CSS styles for the application.
+ * It includes custom styles and Tailwind CSS classes.
+ */
+
+
 .container {
   padding: 20px;
 }

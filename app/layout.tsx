@@ -1,3 +1,8 @@
+/**
+ * This file defines the layout component of the application.
+ * It includes global styles and common layout elements.
+ */
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";

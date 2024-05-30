@@ -1,3 +1,8 @@
+/**
+ * This file contains the configuration for Tailwind CSS.
+ * It defines the content paths and custom theme settings.
+ */
+
 import type { Config } from "tailwindcss";
 
 const config: Config = {

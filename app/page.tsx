@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * This file defines the main page component of the application.
+ * It integrates with the API to fetch anchor data and provides a UI
+ * for searching and displaying results.
+ */
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
