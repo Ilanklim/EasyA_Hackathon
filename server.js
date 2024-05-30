@@ -1,7 +1,10 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 const app = express();
 const port = 3001;
+
+app.use(cors());
 
 const apis = [
   { url: 'https://stellar-anchor.payfura.com/sep24/info', name: 'Payfura' },
@@ -24,7 +27,6 @@ const fetchApiData = async (api) => {
 // Function to extract unique coins from the deposit sections
 const fetch_coins = (data) => {
   const coinSet = new Set();
-  const coinsBySource = {};
 
   data.forEach((apiData) => {
     if (apiData && apiData.data && apiData.data.deposit) {
@@ -32,19 +34,12 @@ const fetch_coins = (data) => {
       depositCoins.forEach((coin) => {
         if (apiData.data.deposit[coin].enabled) {
           coinSet.add(coin);
-          if (!coinsBySource[apiData.name]) {
-            coinsBySource[apiData.name] = [];
-          }
-          coinsBySource[apiData.name].push(coin);
         }
       });
     }
   });
 
-  return {
-    allCoins: Array.from(coinSet),
-    coinsBySource
-  };
+  return Array.from(coinSet);
 };
 
 // Function to aggregate results for a specific coin and type (deposit or withdraw)
@@ -56,7 +51,7 @@ const aggregateResults = (data, coin, type) => {
     if (type === 'deposit' && apiData && apiData.data.deposit && apiData.data.deposit[coin]) {
       const coinData = apiData.data.deposit[coin];
       results.push({ coin, ...coinData, source: apiData.name });
-    }  // For type = withdraw
+    } // For type = withdraw
     else if (type === 'withdraw' && apiData && apiData.data.withdraw && apiData.data.withdraw[coin]) {
       const coinData = apiData.data.withdraw[coin];
       results.push({ coin, ...coinData, source: apiData.name });
@@ -74,10 +69,10 @@ app.get('/api/all_coins_list', async (req, res) => {
   const apiPromises = apis.map((api) => fetchApiData(api));
   const apiData = await Promise.all(apiPromises);
 
-  const coins_list = fetch_coins(apiData);
+  const allCoins = fetch_coins(apiData);
 
-  if (coins_list.allCoins.length > 0) {
-    res.json(coins_list.allCoins);
+  if (allCoins.length > 0) {
+    res.json(allCoins);
   } else {
     res.status(404).json({ error: 'No coins found.' });
   }
