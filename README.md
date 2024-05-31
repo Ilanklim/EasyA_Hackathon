@@ -1,12 +1,10 @@
-# README
+# Stellar Anchor Directory
 
-## Stellar Anchor Directory
+## Overview
 
-### Overview
+The Stellar Anchor Directory is a user-friendly interface that allows users to discover and compare Stellar Anchors based on various factors such as price, location availability, and speed. Our goal is to help users seamlessly select and use the best Stellar Anchor for their needs.
 
-The Stellar Anchor Directory is a user-friendly interface that allows users to discover and compare Stellar Anchors based on various factors such as price, location availability, and speed. Our goal is to help users seamlessly select and use the best Stellar Anchor for their needs. 
-
-### Features
+## Features
 
 - **Filter Anchors:** Users can filter Anchors based on price, location, availability, speed, and supported tokens.
 - **Anchor Information:** Access detailed information about each Anchor, including fees, transaction limits, and supported services.
@@ -16,37 +14,30 @@ The Stellar Anchor Directory is a user-friendly interface that allows users to d
 - **Geolocation Services:** Detects user location to suggest the best Anchors available in their region.
 - **Mobile Support:** The platform is accessible on both web and mobile applications.
 
-### Technology Stack
+## Technology Stack
 
-#### Frontend
+### Frontend
 
-- **Astro:** For static site generation.
-- **HTML:** For page layout.
-- **CSS:** For styling pages.
-- **JavaScript:** For frontend logic and dynamic features.
+- **React:** For building the user interface.
+- **Tailwind CSS:** For styling and responsive design.
+- **TypeScript:** For type-safe JavaScript.
 
-#### Backend
+### Backend
 
 - **Node.js:** For backend logic and API integration.
+- **Express:** Web framework for Node.js.
 - **Database Options:**
-  - SQL
   - MongoDB
   - MySQL
-  - PostgreSQL (with GUI support via pgAdmin 4)
+  - SQL
 
-#### Automation
-
-- **Playwright:** For end-to-end testing, supporting mobile.
-- **Puppeteer:** For automation with a large community and extensive resources.
-
-#### Hosting
+### Hosting
 
 - **Vercel**
-- **Netlify**
-- **AWS (with free credits)**
+- **AWS**
 - **Heroku for backend**
 
-### How It Works
+## How It Works
 
 1. **Search and Filter:**
    - Users search for Anchors and apply filters based on their preferences.
@@ -66,45 +57,29 @@ The Stellar Anchor Directory is a user-friendly interface that allows users to d
 5. **Rate and Review:**
    - Users can rate Anchors and provide feedback on their experiences.
 
-### Architecture
-
-#### Frontend
-
-- **Astro**: Generates static pages for optimal performance.
-- **HTML, CSS, JavaScript**: Build and style the user interface.
-
-#### Backend
-
-- **Node.js**: Handles server-side logic and integrates with Anchor APIs.
-- **Database**: Stores user data, ratings, reviews, and Anchor information.
-
-#### Automation
-
-- **Playwright and Puppeteer**: Automated testing ensures reliability and smooth user experience.
-
-#### Hosting
-
-- **Vercel, Netlify, AWS, Heroku**: Flexible hosting options for deployment.
-
-### Installation
+## Installation
 
 1. **Clone the Repository:**
+
    ```bash
    git clone https://github.com/your-repo/stellar-anchor-directory.git
    cd stellar-anchor-directory
    ```
 
 2. **Install Dependencies:**
+
    ```bash
    npm install
    ```
 
 3. **Start the Development Server:**
+
    ```bash
    npm run dev
    ```
 
 4. **Build for Production:**
+
    ```bash
    npm run build
    ```
@@ -112,18 +87,18 @@ The Stellar Anchor Directory is a user-friendly interface that allows users to d
 5. **Deploy:**
    - Follow the hosting provider's instructions for deploying your application.
 
-### Contributing
+## Contributing
 
 We welcome contributions! Please read our [contributing guidelines](CONTRIBUTING.md) for more information.
 
-### License
+## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-### Contact
+## Contact
 
 For questions, please contact [your-email@example.com].
 
 ---
 
-Feel free to enhance this README as needed for your project.
+This README should now accurately reflect the current state of your project, including the new starry background and other recent changes. If you need further modifications or have additional details to include, let me know! I LOVE CODING.
