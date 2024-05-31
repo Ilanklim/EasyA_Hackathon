@@ -78,7 +78,7 @@ const Home = () => {
       <div className={`flex space-x-4 ${showAnchors ? 'transform transition-transform duration-500' : ''}`}>
         <div className={`bg-gray-800 p-6 rounded-lg shadow-lg w-96 h-auto transition-all duration-500`}>
           <h1 className="text-2xl font-bold text-center mb-6" style={{ background: 'linear-gradient(to right, #fcd34d, #b45309)', WebkitBackgroundClip: 'text', color: 'transparent' }}>
-            Stanchor
+            StellarHub
           </h1>
           <div className="flex mb-4">
             <button
@@ -146,7 +146,6 @@ const Home = () => {
               anchors.map((anchor: any, index: number) => (
                 <div key={index} className="border border-gray-500 p-3 rounded-md mb-2 text-white">
                   <h1 className="anchor_name">{anchor.source}</h1>
-                  <br></br>
                   <p><strong>Coin:</strong> {anchor.coin}</p>
                   <p><strong>Fee:</strong> {anchor.fee_fixed}</p>
                 </div>
