@@ -45,7 +45,6 @@ const fetch_coins = (data) => {
   const coinSet = new Set();
 
   data.forEach((apiData) => {
-    console.log(apiData)
     if (apiData && apiData.data && apiData.data.deposit) {
       const depositCoins = Object.keys(apiData.data.deposit);
       depositCoins.forEach((coin) => {
@@ -62,10 +61,8 @@ const fetch_coins = (data) => {
 // Function to aggregate results for a specific coin and type (deposit or withdraw)
 const aggregateResults = (data, value, coin, type, country) => {
   let results = [];
-  console.log(data)
 
   data.forEach((apiData) => {
-    console.log(apiData)
     // if (apiData.countries.includes(country)) {
 
     // For type = deposits

@@ -18,7 +18,7 @@ const Home = () => {
       try {
         const res = await axios.get('http://localhost:3001/api/all_coins_list');
         setCoinList(res.data);
-        setCoin1(res.data[0]); // Set the first coin as the default selected value
+        setCoin1("USDC"); // Set the first coin as the default selected value
         setCoin2(res.data[1]); // Set the first coin as the default selected value
       } catch (error) {
         console.error('Error fetching coins:', error);
@@ -43,7 +43,7 @@ const Home = () => {
       const anchor_result = await axios.get('http://localhost:3001/api/aggregate', {
         params: {
           amount,
-          coin2,
+          coin: coin2,
           type,
           country
         }
