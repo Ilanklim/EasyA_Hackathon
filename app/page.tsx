@@ -105,13 +105,13 @@ const Home = () => {
           />
           <label className="block text-white mb-2">From</label>
           <select
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            value={coin}
+            onChange={(e) => setCoin(e.target.value)}
             className="w-full p-2 mb-3 border border-gray-300 rounded-md text-black"
           >
-            {countryList.map((country, index) => (
-              <option key={index} value={country}>
-                {country}
+            {coinList.map((coin, index) => (
+              <option key={index} value={coin}>
+                {coin}
               </option>
             ))}
           </select>
