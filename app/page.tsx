@@ -5,7 +5,8 @@ import axios from 'axios';
 const Home = () => {
   const [amount, setAmount] = useState<string>('');
   const [country, setCountry] = useState<string>('US');
-  const [coin, setCoin] = useState<string>('');
+  const [coin1, setCoin1] = useState<string>('');
+  const [coin2, setCoin2] = useState<string>('');
   const [type, setType] = useState<string>('deposit');
   const [coinList, setCoinList] = useState<string[]>([]);
   const [anchors, setAnchors] = useState<any[]>([]);
@@ -17,7 +18,8 @@ const Home = () => {
       try {
         const res = await axios.get('http://localhost:3001/api/all_coins_list');
         setCoinList(res.data);
-        setCoin(res.data[0]); // Set the first coin as the default selected value
+        setCoin1(res.data[0]); // Set the first coin as the default selected value
+        setCoin2(res.data[1]); // Set the first coin as the default selected value
       } catch (error) {
         console.error('Error fetching coins:', error);
       }
@@ -41,7 +43,7 @@ const Home = () => {
       const anchor_result = await axios.get('http://localhost:3001/api/aggregate', {
         params: {
           amount,
-          coin,
+          coin2,
           type,
           country
         }
@@ -105,8 +107,8 @@ const Home = () => {
           />
           <label className="block text-white mb-2">From</label>
           <select
-            value={coin}
-            onChange={(e) => setCoin(e.target.value)}
+            value={coin1}
+            onChange={(e) => setCoin1(e.target.value)}
             className="w-full p-2 mb-3 border border-gray-300 rounded-md text-black"
           >
             {coinList.map((coin, index) => (
@@ -117,8 +119,8 @@ const Home = () => {
           </select>
           <label className="block text-white mb-2">To</label>
           <select
-            value={coin}
-            onChange={(e) => setCoin(e.target.value)}
+            value={coin2}
+            onChange={(e) => setCoin2(e.target.value)}
             className="w-full p-2 mb-3 border border-gray-300 rounded-md text-black"
           >
             {coinList.map((coin, index) => (
