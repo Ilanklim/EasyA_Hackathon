@@ -54,7 +54,14 @@ const Home = () => {
       console.error('Error fetching data:', error);
     }
   };
-
+  //   try {
+  //     const res = await axios.get('http://localhost:3001/api/anchors');
+  //     setAnchors(res.data);
+  //     setShowAnchors(true); // Show the anchors container
+  //   } catch (error) {
+  //     console.error('Error fetching anchors:', error);
+  //   }
+  // };
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*$/.test(value)) {
@@ -91,17 +98,15 @@ const Home = () => {
           <div className="flex mb-4">
             <button
               onClick={() => setType('deposit')}
-              className={`flex-1 py-2 rounded-l-lg ${
-                type === 'deposit' ? 'bg-yellow-400 opacity-75' : 'bg-yellow-400 opacity-100 hover:opacity-75'
-              } text-black font-semibold active:opacity-75`}
+              className={`flex-1 py-2 rounded-l-lg ${type === 'deposit' ? 'bg-yellow-400 opacity-75' : 'bg-yellow-400 opacity-100 hover:opacity-75'
+                } text-black font-semibold active:opacity-75`}
             >
               Deposit
             </button>
             <button
               onClick={() => setType('withdraw')}
-              className={`flex-1 py-2 rounded-r-lg ${
-                type === 'withdraw' ? 'bg-yellow-400 opacity-75' : 'bg-yellow-400 opacity-100 hover:opacity-75'
-              } text-black font-semibold active:opacity-75`}
+              className={`flex-1 py-2 rounded-r-lg ${type === 'withdraw' ? 'bg-yellow-400 opacity-75' : 'bg-yellow-400 opacity-100 hover:opacity-75'
+                } text-black font-semibold active:opacity-75`}
             >
               Withdraw
             </button>
@@ -148,11 +153,12 @@ const Home = () => {
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-96 h-auto transition-opacity duration-500">
             <h2 className="text-white text-xl font-bold mb-4">Available Anchors</h2>
             {anchors.length ? (
-              anchors.slice(0, 3).map((anchor, index) => (
+              anchors.map((anchor: any, index: number) => (
                 <div key={index} className="border border-gray-500 p-3 rounded-md mb-2 text-white">
-                  <p><strong>Name:</strong> {anchor.name}</p>
-                  <p><strong>Fee:</strong> {anchor.fee}</p>
-                  <p><strong>Availability:</strong> {anchor.availability}</p>
+                  <h1 className="anchor_name">{anchor.source}</h1>
+                  <br></br>
+                  <p><strong>Coin:</strong> {anchor.coin}</p>
+                  <p><strong>Fee:</strong> {anchor.fee_fixed}</p>
                 </div>
               ))
             ) : (
