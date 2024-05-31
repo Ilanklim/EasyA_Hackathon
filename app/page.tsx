@@ -147,7 +147,7 @@ const Home = () => {
             {anchors.length ? (
               anchors.map((anchor: any, index: number) => (
                 <div key={index} className="border border-gray-500 p-3 rounded-md mb-2 text-white">
-                  <h1 className="anchor_name">{anchor.source}</h1>
+                  <h1 className="text-center text-yellow-400 font-semibold">{anchor.source}</h1>
                   <p><strong>Coin:</strong> {anchor.coin}</p>
                   <p><strong>Fee:</strong> {anchor.fee_fixed}</p>
                 </div>
