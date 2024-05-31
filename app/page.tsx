@@ -10,6 +10,7 @@ const Home = () => {
   const [coinList, setCoinList] = useState<string[]>([]);
   const [anchors, setAnchors] = useState<any[]>([]);
   const [showAnchors, setShowAnchors] = useState<boolean>(false);
+  const [countryList, setCountryList] = useState<string[]>([]);
 
   useEffect(() => {
     const getCoins = async () => {
@@ -21,19 +22,34 @@ const Home = () => {
         console.error('Error fetching coins:', error);
       }
     };
+    const getCountries = async () => {
+      try {
+        const res = await axios.get('http://localhost:3001/api/countries_list');
+        setCountryList(res.data);
+        setCountry(res.data[0]); // Set the first coin as the default selected value
+      } catch (error) {
+        console.error('Error fetching coins:', error);
+      }
+    };
+
+    getCountries();
 
     getCoins();
   }, []);
 
   const handleFindClick = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/api/aggregate', {
+      const anchor_result = await axios.get('http://localhost:3001/api/aggregate', {
         params: {
+          amount,
           coin,
-          type
+          type,
+          country
         }
       });
-      fetchAnchors();
+      // fetchAnchors();
+      setAnchors(anchor_result.data);
+      setShowAnchors(true);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -52,15 +68,15 @@ const Home = () => {
     }
   };
 
-  const fetchAnchors = async () => {
-    try {
-      const res = await axios.get('http://localhost:3001/api/anchors');
-      setAnchors(res.data);
-      setShowAnchors(true); // Show the anchors container
-    } catch (error) {
-      console.error('Error fetching anchors:', error);
-    }
-  };
+  // const fetchAnchors = async () => {
+  //   try {
+  //     const res = await axios.get('http://localhost:3001/api/anchors');
+  //     setAnchors(res.data);
+  //     setShowAnchors(true); // Show the anchors container
+  //   } catch (error) {
+  //     console.error('Error fetching anchors:', error);
+  //   }
+  // };
 
   const isDepositSelected = type === 'deposit';
   const isWithdrawSelected = type === 'withdraw';
