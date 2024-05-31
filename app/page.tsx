@@ -52,7 +52,14 @@ const Home = () => {
       console.error('Error fetching data:', error);
     }
   };
-
+  //   try {
+  //     const res = await axios.get('http://localhost:3001/api/anchors');
+  //     setAnchors(res.data);
+  //     setShowAnchors(true); // Show the anchors container
+  //   } catch (error) {
+  //     console.error('Error fetching anchors:', error);
+  //   }
+  // };
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*$/.test(value)) {
@@ -136,11 +143,12 @@ const Home = () => {
               Available Anchors
             </h2>
             {anchors.length ? (
-              anchors.slice(0, 3).map((anchor, index) => (
+              anchors.map((anchor: any, index: number) => (
                 <div key={index} className="border border-gray-500 p-3 rounded-md mb-2 text-white">
-                  <p><strong>Name:</strong> {anchor.name}</p>
-                  <p><strong>Fee:</strong> {anchor.fee}</p>
-                  <p><strong>Availability:</strong> {anchor.availability}</p>
+                  <h1 className="anchor_name">{anchor.source}</h1>
+                  <br></br>
+                  <p><strong>Coin:</strong> {anchor.coin}</p>
+                  <p><strong>Fee:</strong> {anchor.fee_fixed}</p>
                 </div>
               ))
             ) : (

@@ -56,7 +56,7 @@ const fetch_coins = (data) => {
     }
   });
 
-  return Array.from(coinSet);
+  return Array.from(coinSet).sort();
 };
 
 // Function to aggregate results for a specific coin and type (deposit or withdraw)

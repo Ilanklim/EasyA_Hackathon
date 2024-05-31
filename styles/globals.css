@@ -13,3 +13,9 @@ body {
 .main {
   display: flex;
 }
+
+.anchor_name {
+  font-size: 24px;
+  font-family: monospace;
+  color: coral;
+}
