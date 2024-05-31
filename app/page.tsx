@@ -26,14 +26,13 @@ const Home = () => {
       try {
         const res = await axios.get('http://localhost:3001/api/countries_list');
         setCountryList(res.data);
-        setCountry(res.data[0]); // Set the first coin as the default selected value
+        setCountry(res.data[0]); // Set the first country as the default selected value
       } catch (error) {
-        console.error('Error fetching coins:', error);
+        console.error('Error fetching countries:', error);
       }
     };
 
     getCountries();
-
     getCoins();
   }, []);
 
@@ -47,7 +46,6 @@ const Home = () => {
           country
         }
       });
-      // fetchAnchors();
       setAnchors(anchor_result.data);
       setShowAnchors(true);
     } catch (error) {
@@ -68,19 +66,6 @@ const Home = () => {
     }
   };
 
-  // const fetchAnchors = async () => {
-  //   try {
-  //     const res = await axios.get('http://localhost:3001/api/anchors');
-  //     setAnchors(res.data);
-  //     setShowAnchors(true); // Show the anchors container
-  //   } catch (error) {
-  //     console.error('Error fetching anchors:', error);
-  //   }
-  // };
-
-  const isDepositSelected = type === 'deposit';
-  const isWithdrawSelected = type === 'withdraw';
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-white p-4">
       <div className={`flex space-x-4 ${showAnchors ? 'transform transition-transform duration-500' : ''}`}>
@@ -91,17 +76,13 @@ const Home = () => {
           <div className="flex mb-4">
             <button
               onClick={() => setType('deposit')}
-              className={`flex-1 py-2 rounded-l-lg ${
-                type === 'deposit' ? 'bg-yellow-400 opacity-75' : 'bg-yellow-400 opacity-100 hover:opacity-75'
-              } text-black font-semibold active:opacity-75`}
+              className={`flex-1 py-2 rounded-l-lg ${type === 'deposit' ? 'bg-yellow-400 opacity-75' : 'bg-yellow-400 opacity-100 hover:opacity-75'} text-black font-semibold active:opacity-75`}
             >
               Deposit
             </button>
             <button
               onClick={() => setType('withdraw')}
-              className={`flex-1 py-2 rounded-r-lg ${
-                type === 'withdraw' ? 'bg-yellow-400 opacity-75' : 'bg-yellow-400 opacity-100 hover:opacity-75'
-              } text-black font-semibold active:opacity-75`}
+              className={`flex-1 py-2 rounded-r-lg ${type === 'withdraw' ? 'bg-yellow-400 opacity-75' : 'bg-yellow-400 opacity-100 hover:opacity-75'} text-black font-semibold active:opacity-75`}
             >
               Withdraw
             </button>
@@ -121,9 +102,11 @@ const Home = () => {
             onChange={(e) => setCountry(e.target.value)}
             className="w-full p-2 mb-3 border border-gray-300 rounded-md text-black"
           >
-            <option value="US">US</option>
-            <option value="CA">CA</option>
-            {/* Add more countries as needed */}
+            {countryList.map((country, index) => (
+              <option key={index} value={country}>
+                {country}
+              </option>
+            ))}
           </select>
           <label className="block text-white mb-2">To</label>
           <select
@@ -146,7 +129,12 @@ const Home = () => {
         </div>
         {showAnchors && (
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-96 h-auto transition-opacity duration-500">
-            <h2 className="text-white text-xl font-bold mb-4">Available Anchors</h2>
+            <h2
+              className="text-xl font-bold mb-4 text-center"
+              style={{ background: 'linear-gradient(to right, #fcd34d, #b45309)', WebkitBackgroundClip: 'text', color: 'transparent' }}
+            >
+              Available Anchors
+            </h2>
             {anchors.length ? (
               anchors.slice(0, 3).map((anchor, index) => (
                 <div key={index} className="border border-gray-500 p-3 rounded-md mb-2 text-white">
@@ -156,7 +144,7 @@ const Home = () => {
                 </div>
               ))
             ) : (
-              <p className="text-white">No anchors available</p>
+              <p className="text-white text-center">No anchors available</p>
             )}
           </div>
         )}
