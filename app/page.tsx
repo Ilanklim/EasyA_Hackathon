@@ -12,23 +12,25 @@ const Home = () => {
   const [anchors, setAnchors] = useState<any[]>([]);
   const [showAnchors, setShowAnchors] = useState<boolean>(false);
   const [countryList, setCountryList] = useState<string[]>([]);
+  const [isMobileView, setIsMobileView] = useState<boolean>(window.innerWidth < 900);
 
   useEffect(() => {
     const getCoins = async () => {
       try {
         const res = await axios.get('http://localhost:3001/api/all_coins_list');
         setCoinList(res.data);
-        setCoin1("USDC"); // Set the first coin as the default selected value
-        setCoin2(res.data[1]); // Set the first coin as the default selected value
+        setCoin1("USDC");
+        setCoin2(res.data[1]);
       } catch (error) {
         console.error('Error fetching coins:', error);
       }
     };
+
     const getCountries = async () => {
       try {
         const res = await axios.get('http://localhost:3001/api/countries_list');
         setCountryList(res.data);
-        setCountry(res.data[0]); // Set the first country as the default selected value
+        setCountry(res.data[0]);
       } catch (error) {
         console.error('Error fetching countries:', error);
       }
@@ -36,6 +38,13 @@ const Home = () => {
 
     getCountries();
     getCoins();
+
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth < 900);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const handleFindClick = async () => {
@@ -54,14 +63,7 @@ const Home = () => {
       console.error('Error fetching data:', error);
     }
   };
-  //   try {
-  //     const res = await axios.get('http://localhost:3001/api/anchors');
-  //     setAnchors(res.data);
-  //     setShowAnchors(true); // Show the anchors container
-  //   } catch (error) {
-  //     console.error('Error fetching anchors:', error);
-  //   }
-  // };
+
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*$/.test(value)) {
@@ -77,7 +79,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white p-4">
-      <div className={`flex space-x-4 ${showAnchors ? 'transform transition-transform duration-500' : ''}`}>
+      <div className={`flex ${isMobileView ? 'flex-col space-y-4' : 'space-x-4'} ${showAnchors ? 'transform transition-transform duration-500' : ''}`}>
         <div className={`bg-gray-800 p-6 rounded-lg shadow-lg w-96 h-auto transition-all duration-500`}>
           <h1 className="text-2xl font-bold text-center mb-6" style={{ background: 'linear-gradient(to right, #fcd34d, #b45309)', WebkitBackgroundClip: 'text', color: 'transparent' }}>
             StellarHub
