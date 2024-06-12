@@ -4,10 +4,13 @@
 
 The Stellar Anchor Directory is a user-friendly interface that allows users to discover and compare Stellar Anchors based on various factors such as price, location availability, and speed. Our goal is to help users seamlessly select and use the best Stellar Anchor for their needs.
 
-## Features
+## Current Features
 
 - **Filter Anchors:** Users can filter Anchors based on price, location, availability, speed, and supported tokens.
 - **Anchor Information:** Access detailed information about each Anchor, including fees, transaction limits, and supported services.
+
+## Future Features
+
 - **Seamless Onboarding:** Users can select an Anchor and transfer value onto the Stellar blockchain seamlessly.
 - **Email Notifications:** Users receive updates on fee changes, new Anchors, and service disruptions.
 - **Rating System:** Users can rate and review Anchors based on their experiences.
@@ -39,7 +42,7 @@ The Stellar Anchor Directory is a user-friendly interface that allows users to d
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/your-repo/easya-hackathon.git
+    git clone https://github.com/Ilanklim/easya-hackathon.git
     cd easya-hackathon
     ```
 
@@ -67,6 +70,12 @@ The Stellar Anchor Directory is a user-friendly interface that allows users to d
     npm start
     ```
 
+6. **Run the backend**:
+
+    ```bash
+    node server.js
+    ```
+
 ## Configuration
 
 - **Environment Variables**: Define your environment variables in a `.env` file in the root directory.
@@ -85,4 +94,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 For any inquiries or feedback, please contact [idk7@cornell.edu](mailto:idk7@cornell.edu).
-
