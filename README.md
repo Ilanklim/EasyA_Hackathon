@@ -14,29 +14,6 @@ The Stellar Anchor Directory is a user-friendly interface that allows users to d
 - **Geolocation Services:** Detects user location to suggest the best Anchors available in their region.
 - **Mobile Support:** The platform is accessible on both web and mobile applications.
 
-## Technology Stack
-
-### Frontend
-
-- **React:** For building the user interface.
-- **Tailwind CSS:** For styling and responsive design.
-- **TypeScript:** For type-safe JavaScript.
-
-### Backend
-
-- **Node.js:** For backend logic and API integration.
-- **Express:** Web framework for Node.js.
-- **Database Options:**
-  - MongoDB
-  - MySQL
-  - SQL
-
-### Hosting
-
-- **Vercel**
-- **AWS**
-- **Heroku for backend**
-
 ## How It Works
 
 1. **Search and Filter:**
@@ -59,46 +36,53 @@ The Stellar Anchor Directory is a user-friendly interface that allows users to d
 
 ## Installation
 
-1. **Clone the Repository:**
+1. **Clone the repository**:
 
-   ```bash
-   git clone https://github.com/your-repo/stellar-anchor-directory.git
-   cd stellar-anchor-directory
-   ```
+    ```bash
+    git clone https://github.com/your-repo/easya-hackathon.git
+    cd easya-hackathon
+    ```
 
-2. **Install Dependencies:**
+2. **Install dependencies**:
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
-3. **Start the Development Server:**
+3. **Run the development server**:
 
-   ```bash
-   npm run dev
-   ```
+    ```bash
+    npm run dev
+    ```
 
-4. **Build for Production:**
+4. **Build for production**:
 
-   ```bash
-   npm run build
-   ```
+    ```bash
+    npm run build
+    ```
 
-5. **Deploy:**
-   - Follow the hosting provider's instructions for deploying your application.
+5. **Start the production server**:
 
-## Contributing
+    ```bash
+    npm start
+    ```
 
-We welcome contributions! Please read our [contributing guidelines](CONTRIBUTING.md) for more information.
+## Configuration
+
+- **Environment Variables**: Define your environment variables in a `.env` file in the root directory.
+- **Tailwind CSS**: Customize your Tailwind configuration in `tailwind.config.ts`.
+
+## Scripts
+
+- `npm run dev`: Runs the application in development mode.
+- `npm run build`: Builds the application for production.
+- `npm start`: Starts the production server.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
-For questions, please contact [your-email@example.com].
+For any inquiries or feedback, please contact [idk7@cornell.edu](mailto:idk7@cornell.edu).
 
----
-
-This README should now accurately reflect the current state of your project, including the new starry background and other recent changes. If you need further modifications or have additional details to include, let me know! I LOVE CODING.
