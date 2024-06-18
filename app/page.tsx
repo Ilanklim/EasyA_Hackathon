@@ -12,7 +12,20 @@ const Home = () => {
   const [anchors, setAnchors] = useState<any[]>([]);
   const [showAnchors, setShowAnchors] = useState<boolean>(false);
   const [countryList, setCountryList] = useState<string[]>([]);
-  const [isMobileView, setIsMobileView] = useState<boolean>(window.innerWidth < 900);
+  const [isMobileView, setIsMobileView] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsMobileView(window.innerWidth < 900);
+
+      const handleResize = () => {
+        setIsMobileView(window.innerWidth < 900);
+      };
+
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   useEffect(() => {
     const getCoins = async () => {
@@ -38,13 +51,6 @@ const Home = () => {
 
     getCountries();
     getCoins();
-
-    const handleResize = () => {
-      setIsMobileView(window.innerWidth < 900);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const handleFindClick = async () => {
